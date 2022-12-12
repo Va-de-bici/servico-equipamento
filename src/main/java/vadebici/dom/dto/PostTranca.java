@@ -24,39 +24,39 @@ public class PostTranca {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumero(Integer num) {
+        this.numero = num;
     }
 
     public String getLocalizacao() {
         return localizacao;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setLocalizacao(String loc) {
+        this.localizacao = loc;
     }
 
     public String getAnoDeFabricacao() {
         return anoDeFabricacao;
     }
 
-    public void setAnoDeFabricacao(String anoDeFabricacao) {
-        this.anoDeFabricacao = anoDeFabricacao;
+    public void setAnoDeFabricacao(String anoFab) {
+        this.anoDeFabricacao = anoFab;
     }
 
     public String getModelo() {
         return modelo;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public void setModelo(String mod) {
+        this.modelo = mod;
     }
 
     public TrancaStatus getStatus() {
         return status;
     }
 
-    public void setStatus(TrancaStatus status) {
-        this.status = status;
+    public void setStatus(TrancaStatus stt) {
+        this.status = stt;
     }
 }
