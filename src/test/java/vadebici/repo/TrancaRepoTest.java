@@ -136,7 +136,7 @@ public class TrancaRepoTest {
     @Test
     void removeDaRede_QuandoBemSucedido() {
         TrancaNaRede trancaNaRede = getTrancaNaRede();
-        trancaRepositorio.removerDaRede(trancaNaRede);
+        trancaRepositorio.removerDaRede(getTrancaNaRede());
         Tranca trancaResposta = trancaRepositorio.buscarTranca(trancaNaRede.getIdTranca());
 
         assertNull(trancaResposta.getIdTotem());
