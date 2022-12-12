@@ -10,7 +10,7 @@ public class TrancaModel {
     public static Tranca getTranca() {
         Tranca tranca = new Tranca();
         tranca.setId("123");
-        tranca.setIdBicicleta("123");
+        tranca.setIdBicicleta("945");
         tranca.setIdTotem("123");
         tranca.setModelo("123");
         tranca.setNumero("123");
