@@ -1,0 +1,30 @@
+variables:
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar"  # Defines the location of the analysis task cache
+  GIT_DEPTH: "0"  # Tells git to fetch all the branches of the project, required by the analysis task
+  HEROKU_APP_NAME: "va-de-bici"
+  HEROKU_PRODUCTION_KEY: "8c6dbdf7-c3cf-43db-b8f5-67de616a69e8"
+
+before_script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+
+sonarcloud-check:
+  image: maven:3.6.3-jdk-11
+  cache:
+    key: "${CI_JOB_NAME}"
+    paths:
+      - .sonar/cache
+  script:
+    - mvn verify sonar:sonar -Dsonar.projectKey=pm-2022-2-grupo-b_bicicletario
+  only:
+    - merge_requests
+    - main
+    - develop
+
+deploy:
+    image: ruby:latest
+    script:
+        - dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_PRODUCTION_KEY
+    only:
+        - main
