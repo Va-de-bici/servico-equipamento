@@ -64,7 +64,7 @@ public class TrancaRepo {
         Tranca tranca = buscarTranca(trancaNaRede.getIdTranca());
         Totem totem = buscarTotem(trancaNaRede.getIdTotem());
         tranca.setIdTotem(totem.getId());
-//        tranca.setStatus(TrancaStatus.DISPONIVEL);
+       tranca.setStatus(TrancaStatus.DISPONIVEL);
         Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
     }
 
