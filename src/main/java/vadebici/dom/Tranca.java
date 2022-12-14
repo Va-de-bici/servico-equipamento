@@ -29,6 +29,11 @@ public class Tranca {
             ;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, idTotem, idBicicleta, numero, localizacao, anoDeFabricacao, modelo, status);
+    }
+
     public String getId() {
         return id;
     }

@@ -63,12 +63,12 @@ public class TrancaController {
         ctx.result(response);
     }
 
-    public static void integrarNaRede(Context ctx) {
-        String body = ctx.body();
-        TrancaNaRede trancaNaRede = JavalinJson.getFromJsonMapper().map(body, TrancaNaRede.class);
-        trancaRepositorio.integrarNaRede(trancaNaRede);
-        ctx.status(200);
-    }
+    // public static void integrarNaRede(Context ctx) {
+    //     String body = ctx.body();
+    //     TrancaNaRede trancaNaRede = JavalinJson.getFromJsonMapper().map(body, TrancaNaRede.class);
+    //     trancaRepositorio.integrarNaRede(trancaNaRede);
+    //     ctx.status(200);
+    // }
 
     public static void removerDaRede(Context ctx) {
         String body = ctx.body();
