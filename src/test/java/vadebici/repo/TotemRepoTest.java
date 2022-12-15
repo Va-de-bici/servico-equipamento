@@ -70,16 +70,18 @@ public class TotemRepoTest {
 
     @Test
     void atualizarTotem_LancaExecao_QuandoNaoEncontrado() {
-        assertThrows(GenericApiException.class,
+        GenericApiException ex = assertThrows(GenericApiException.class,
                 () -> TOTEM_REPO.atualizarTotem("000", new Totem()));
+        assertEquals("Totem não encontrado", ex.getMessage());
     }
 
     @Test
     void deletaTotem_QuandoBemSucedido() {
         Totem totem = getTotem();
         TOTEM_REPO.deletarTotem(totem.getId());
-        assertThrows(GenericApiException.class,
+        GenericApiException ex = assertThrows(GenericApiException.class,
                 () -> TOTEM_REPO.buscarTotem(totem.getId()));
+        assertEquals("Totem não encontrado", ex.getMessage());
     }
 
     @Test

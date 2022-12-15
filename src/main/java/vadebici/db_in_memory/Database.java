@@ -8,6 +8,9 @@ public class Database {
     public static final Map<String, Totem> TOTEM_TABLE = new HashMap<>();
     public static final Map<String, Tranca> TRANCA_TABLE = new HashMap<>();
 
+    private Database() {
+    }
+
     public static void limpar() {
         TOTEM_TABLE.clear();
         TRANCA_TABLE.clear();

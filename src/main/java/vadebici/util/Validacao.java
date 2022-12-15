@@ -11,6 +11,10 @@ import java.util.Set;
 public class Validacao {
     private static final Validator validar;
 
+    private Validacao() {
+    }
+
+
     static {
         validar = Validation
                 .byDefaultProvider()

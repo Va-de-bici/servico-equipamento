@@ -9,6 +9,8 @@ import vadebici.exception.GenericApiException;
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class JavalinApp {
+    private static String PATH_TRANCA = "/tranca/:idTranca";
+
     private final Javalin app =
             Javalin.create(config -> config.defaultContentType = "application/json")
                     .routes(() -> {
@@ -20,10 +22,10 @@ public class JavalinApp {
 
                         path("/tranca", () -> get(TrancaController::buscarTrancas));
                         path("/tranca", () -> post(TrancaController::salvarTranca));
-                        path("/tranca/:idTranca", () -> get(TrancaController::buscarTranca));
-                        path("/tranca/:idTranca", () -> delete(TrancaController::deletarTranca));
-                        path("/tranca/:idTranca", () -> put(TrancaController::atualizarTranca));
-                        path("/tranca/:idTranca/status/:acao", () -> post(TrancaController::alterarStatus));
+                        path(PATH_TRANCA, () -> get(TrancaController::buscarTranca));
+                        path(PATH_TRANCA, () -> delete(TrancaController::deletarTranca));
+                        path(PATH_TRANCA, () -> put(TrancaController::atualizarTranca));
+                        path(PATH_TRANCA + "/status/:acao", () -> post(TrancaController::alterarStatus));
                     })
                     .error(500, ctx -> {
                         GenericApiException ex = new GenericApiException(500, "Ocorreu um erro durante a operação");

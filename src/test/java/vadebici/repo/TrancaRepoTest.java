@@ -77,8 +77,9 @@ public class TrancaRepoTest {
 
     @Test
     void atualizarTranca_LancaExcecao_QuandoNaoEncontrado() {
-        assertThrows(GenericApiException.class,
+        GenericApiException ex = assertThrows(GenericApiException.class,
                 () -> trancaRepositorio.atualizarTranca("000", new Tranca()));
+        assertEquals("Tranca não encontrado", ex.getMessage());
     }
 
     @Test

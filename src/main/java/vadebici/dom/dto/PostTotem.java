@@ -7,9 +7,6 @@ public class PostTotem {
     @NotBlank(message = "O campo 'localizacao' é obrigatório.")
     private String localizacao;
 
-    public PostTotem() {
-    }
-
     public String getLocalizacao() {
         return localizacao;
     }
