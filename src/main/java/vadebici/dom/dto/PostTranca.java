@@ -12,12 +12,10 @@ public class PostTranca {
     @NotBlank(message = "O campo 'localizacao' é obrigatório.")
     private String localizacao;
     @NotBlank(message = "O campo 'anoDeFabricacao' é obrigatório.")
-
     private String anoDeFabricacao;
     @NotBlank(message = "O campo 'modelo' é obrigatório.")
-
     private String modelo;
-    @NotNull(message = "O campo 'numero' é obrigatório.")
+    @NotNull(message = "O campo 'status' é obrigatório.")
     private TrancaStatus status;
 
     public Integer getNumero() {

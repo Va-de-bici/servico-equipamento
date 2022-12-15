@@ -1,7 +1,5 @@
 package vadebici.dom;
 
-import java.util.Objects;
-
 public class Tranca {
     private String id;
     private String idTotem;

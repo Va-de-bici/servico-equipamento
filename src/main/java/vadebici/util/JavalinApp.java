@@ -14,8 +14,8 @@ public class JavalinApp {
     private final Javalin app =
             Javalin.create(config -> config.defaultContentType = "application/json")
                     .routes(() -> {
-                        path("/totem", () -> post(TotemController::salvarTotem));
                         path("/totem", () -> get(TotemController::buscarTotens));
+                        path("/totem", () -> post(TotemController::salvarTotem));
                         path("/totem/:idTotem", () -> delete(TotemController::deletarTotem));
                         path("/totem/:idTotem", () -> put(TotemController::atualizarTotem));
                         path("/totem/:idTotem/trancas", () -> get(TotemController::buscarTrancasPorTotem));
