@@ -1,11 +1,9 @@
 package vadebici.repo;
 
 import vadebici.db_in_memory.Database;
-import vadebici.dom.Totem;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
-import vadebici.dom.dto.TrancaNaRede;
 import vadebici.exception.GenericApiException;
 import vadebici.util.Validacao;
 
@@ -57,28 +55,5 @@ public class TrancaRepo {
         Tranca tranca = buscarTranca(id);
         tranca.setStatus(TrancaStatus.valueOf(status));
         return Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
-    }
-
-    public void integrarNaRede(TrancaNaRede trancaNaRede) {
-        Validacao.validarCampos(trancaNaRede);
-        Tranca tranca = buscarTranca(trancaNaRede.getIdTranca());
-        Totem totem = buscarTotem(trancaNaRede.getIdTotem());
-        tranca.setIdTotem(totem.getId());
-       tranca.setStatus(TrancaStatus.DISPONIVEL);
-        Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
-    }
-
-    public void removerDaRede(TrancaNaRede trancaNaRede) {
-        Validacao.validarCampos(trancaNaRede);
-        Tranca tranca = buscarTranca(trancaNaRede.getIdTranca());
-        if (tranca.getIdBicicleta() != null) throw new GenericApiException(422, "Tranca possui uma bicicleta.");
-        buscarTotem(trancaNaRede.getIdTotem());
-        tranca.setIdTotem(null);
-
-    }
-
-    private Totem buscarTotem(String id) {
-        return Optional.ofNullable(Database.TOTEM_TABLE.get(id))
-                .orElseThrow(() -> new GenericApiException(422, "Totem não encontrado."));
     }
 }

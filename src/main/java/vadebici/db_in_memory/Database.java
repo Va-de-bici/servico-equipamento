@@ -25,7 +25,7 @@ public class Database {
     private static Tranca getTranca() {
         Tranca tranca = new Tranca();
         tranca.setId("123");
-        tranca.setIdBicicleta("945");
+        tranca.setIdBicicleta(null);
         tranca.setIdTotem("123");
         tranca.setStatus(TrancaStatus.OCUPADA);
         tranca.setNumero("123");

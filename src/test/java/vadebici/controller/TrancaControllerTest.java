@@ -12,7 +12,6 @@ import vadebici.db_in_memory.Database;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
-import vadebici.dom.dto.TrancaNaRede;
 import vadebici.util.JavalinApp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -114,16 +113,5 @@ class TrancaControllerTest {
         assertEquals(TrancaStatus.MANUTENCAO.toString(), jsonResponse.get("status"));
         assertEquals(tranca.getModelo(), jsonResponse.get("modelo"));
         assertEquals(tranca.getId(), jsonResponse.get("id"));
-    }
-
-    void integraTrancaNaRede_QuandoBemSucedido() {
-        TrancaNaRede trancaNaRede = getTrancaNaRede();
-
-        HttpResponse<String> response = Unirest.post(BASE_URL+"/integrarNaRede")
-                .body(trancaNaRede)
-                .asString();
-
-        assertEquals(200, response.getStatus());
-        assertEquals("", response.getBody());
     }
 }

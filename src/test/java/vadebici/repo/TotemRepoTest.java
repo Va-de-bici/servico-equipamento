@@ -18,7 +18,7 @@ import static vadebici.model.TrancaModel.getTranca;
 
 public class TotemRepoTest {
 
-    private final TotemRepo totemRepositorio = new TotemRepo();
+    private final TotemRepo TOTEM_REPO = new TotemRepo();
 
     @BeforeEach
     void setUp() {
@@ -33,14 +33,14 @@ public class TotemRepoTest {
     @Test
     void salvaTotem_QuandoBemSucedido() {
         PostTotem postTotem = getPostTotem();
-        Totem totemSalvo = totemRepositorio.salvarTotem(postTotem);
+        Totem totemSalvo = TOTEM_REPO.salvarTotem(postTotem);
         assertNotNull(totemSalvo.getId());
         assertEquals(postTotem.getLocalizacao(), totemSalvo.getLocalizacao());
     }
 
     @Test
     void buscaTotens_QuandoBemSucedido() {
-        List<Totem> totemList = totemRepositorio.buscarTotens();
+        List<Totem> totemList = TOTEM_REPO.buscarTotens();
         assertNotNull(totemList);
         assertEquals(1, totemList.size());
     }
@@ -48,7 +48,7 @@ public class TotemRepoTest {
     @Test
     void buscaTotem_QuandoBemSucedido() {
         Totem totem = getTotem();
-        Totem totemResposta = totemRepositorio.buscarTotem(totem.getId());
+        Totem totemResposta = TOTEM_REPO.buscarTotem(totem.getId());
 
         assertEquals(totem.getLocalizacao(), totemResposta.getLocalizacao());
         assertEquals(totem.getId(), totemResposta.getId());
@@ -57,35 +57,35 @@ public class TotemRepoTest {
     @Test
     void buscarTotem_LancaExcecao_QuandoNaoEncontrado() {
         GenericApiException ex = assertThrows(GenericApiException.class,
-                () -> totemRepositorio.buscarTotem("000"));
+                () -> TOTEM_REPO.buscarTotem("000"));
         assertEquals("Totem não encontrado", ex.getMessage());
     }
 
     @Test
     void atualizaTotem_QuandoBemSucedido() {
         Totem totem = getTotem();
-        Totem totemResposta = totemRepositorio.atualizarTotem(totem.getId(), totem);
+        Totem totemResposta = TOTEM_REPO.atualizarTotem(totem.getId(), totem);
         assertEquals(totem.getLocalizacao(), totemResposta.getLocalizacao());
         assertEquals(totem.getId(), totemResposta.getId());    }
 
     @Test
     void atualizarTotem_LancaExecao_QuandoNaoEncontrado() {
         assertThrows(GenericApiException.class,
-                () -> totemRepositorio.atualizarTotem("000", new Totem()));
+                () -> TOTEM_REPO.atualizarTotem("000", new Totem()));
     }
 
     @Test
     void deletaTotem_QuandoBemSucedido() {
         Totem totem = getTotem();
-        totemRepositorio.deletarTotem(totem.getId());
+        TOTEM_REPO.deletarTotem(totem.getId());
         assertThrows(GenericApiException.class,
-                () -> totemRepositorio.buscarTotem(totem.getId()));
+                () -> TOTEM_REPO.buscarTotem(totem.getId()));
     }
 
     @Test
     void deletarTotem_LancaExecao_QuandoTotemNaoEncotrado() {
         GenericApiException ex = assertThrows(GenericApiException.class,
-                () -> totemRepositorio.deletarTotem("000"));
+                () -> TOTEM_REPO.deletarTotem("000"));
         assertEquals("Totem não encontrado", ex.getMessage());
     }
 
@@ -93,13 +93,9 @@ public class TotemRepoTest {
     void buscaTrancasPorTotem_QuandoBemSucedido() {
         Totem totem = getTotem();
         Tranca tranca = getTranca();
-        List<Tranca> trancaList = totemRepositorio.buscarTrancas(totem.getId());
+        List<Tranca> trancaList = TOTEM_REPO.buscarTrancas(totem.getId());
 
         assertEquals(1, trancaList.size());
-        assertEquals(tranca, trancaList.get(0));
+        assertEquals(tranca.getId(), trancaList.get(0).getId());
     }
-
-
-
-
 }
