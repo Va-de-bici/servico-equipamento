@@ -13,27 +13,6 @@ public class Tranca {
     private String modelo;
     private TrancaStatus status;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tranca tranca = (Tranca) o;
-        return Objects.equals(id, tranca.id) 
-            && Objects.equals(idTotem, tranca.idTotem) 
-            && Objects.equals(idBicicleta, tranca.idBicicleta) 
-            && Objects.equals(numero, tranca.numero) 
-            && Objects.equals(localizacao, tranca.localizacao) 
-            && Objects.equals(anoDeFabricacao, tranca.anoDeFabricacao)
-            && Objects.equals(modelo, tranca.modelo) 
-            && status == tranca.status
-            ;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, idTotem, idBicicleta, numero, localizacao, anoDeFabricacao, modelo, status);
-    }
-
     public String getId() {
         return id;
     }
