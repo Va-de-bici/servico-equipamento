@@ -11,7 +11,7 @@ import java.util.List;
 
 
 public class BicicletaController {
-    private static final String PATH_ID = "idTotem";
+    private static final String PATH_ID = "idBicicleta";
 
     public static BicicletaRepositorio bicicletaRepositorio = new BicicletaRepositorio();
 
