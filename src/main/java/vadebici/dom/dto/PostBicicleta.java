@@ -7,8 +7,8 @@ import vadebici.dom.BicicletaStatus;
 public class PostBicicleta {
     @NotBlank(message = "O campo 'marca' é obrigatório.")
     private String marca;
-    @NotBlank(message = "O campo 'Database' é obrigatório.")
-    private String Database;
+    @NotBlank(message = "O campo 'modelo' é obrigatório.")
+    private String modelo;
     @NotBlank(message = "O campo 'ano' é obrigatório.")
     private String ano;
     @NotNull(message = "O campo 'numero' é obrigatório.")
@@ -20,7 +20,7 @@ public class PostBicicleta {
     public String toString() {
         return "PostBicicleta{" +
                 "marca='" + marca + '\'' +
-                ", Database='" + Database + '\'' +
+                ", modelo='" + modelo + '\'' +
                 ", ano='" + ano + '\'' +
                 ", numero=" + numero +
                 ", status=" + status +
@@ -36,11 +36,11 @@ public class PostBicicleta {
     }
 
     public String getModelo() {
-        return Database;
+        return modelo;
     }
 
-    public void setModelo(String Database) {
-        this.Database = Database;
+    public void setModelo(String modeloBici) {
+        this.modelo = modeloBici;
     }
 
     public String getAno() {

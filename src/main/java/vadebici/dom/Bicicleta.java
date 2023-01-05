@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Bicicleta {
     private String id;
     private String marca;
-    private String Database;
+    private String modelo;
     private String ano;
     private Integer numero;
     private BicicletaStatus status;
@@ -20,7 +20,7 @@ public class Bicicleta {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, marca, Database, ano, numero, status);
+        return Objects.hash(id, marca, modelo, ano, numero, status);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class Bicicleta {
         return "Bicicleta{" +
                 "id='" + id + '\'' +
                 ", marca='" + marca + '\'' +
-                ", Database='" + Database + '\'' +
+                ", modelo='" + modelo + '\'' +
                 ", ano='" + ano + '\'' +
                 ", numero=" + numero +
                 ", status=" + status +
@@ -52,11 +52,11 @@ public class Bicicleta {
     }
 
     public String getModelo() {
-        return Database;
+        return modelo;
     }
 
-    public void setModelo(String Database) {
-        this.Database = Database;
+    public void setModelo(String modeloBici) {
+        this.modelo = modeloBici;
     }
 
     public String getAno() {
