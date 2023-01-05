@@ -15,7 +15,7 @@ public class Bicicleta {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bicicleta bicicleta = (Bicicleta) o;
-        return Objects.equals(id, bicicleta.id) && Objects.equals(marca, bicicleta.marca) && Objects.equals(Database, bicicleta.Database) && Objects.equals(ano, bicicleta.ano) && Objects.equals(numero, bicicleta.numero) && status == bicicleta.status;
+        return Objects.equals(id, bicicleta.id) && Objects.equals(marca, bicicleta.marca) && Objects.equals(modelo, bicicleta.modelo) && Objects.equals(ano, bicicleta.ano) && Objects.equals(numero, bicicleta.numero) && status == bicicleta.status;
     }
 
     @Override
