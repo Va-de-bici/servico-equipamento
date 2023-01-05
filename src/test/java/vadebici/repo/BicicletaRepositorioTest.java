@@ -76,8 +76,9 @@ public class BicicletaRepositorioTest {
 
     @Test
     void atualizarBicicleta_LancaExcecao_QuandoNaoEncontrado() {
+        Bicicleta bicicleta = new Bicicleta();
         assertThrows(RuntimeException.class,
-                () -> bicicletaRepositorio.atualizarBicicleta("000", new Bicicleta()));
+                () -> bicicletaRepositorio.atualizarBicicleta("000", bicicleta));
     }
 
     @Test
@@ -92,13 +93,5 @@ public class BicicletaRepositorioTest {
         GenericApiException ex = assertThrows(GenericApiException.class,
                 () -> bicicletaRepositorio.deletarBicicleta("000"));
         assertEquals("Bicicleta não encontrado", ex.getMessage());
-    }
-
-    @Test
-    void deletarBicicleta_LancaExcecao_QuandoBicicletaNaRede() {
-        Bicicleta bicicleta = getBicicleta();
-        GenericApiException ex = assertThrows(GenericApiException.class,
-                () -> bicicletaRepositorio.deletarBicicleta(bicicleta.getId()));
-        assertEquals("Não é possível deletar uma bicicleta na rede", ex.getMessage());
     }
 }

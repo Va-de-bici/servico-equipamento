@@ -11,6 +11,8 @@ import java.util.List;
 
 
 public class BicicletaController {
+    private static final String PATH_ID = "idTotem";
+
     public static BicicletaRepositorio bicicletaRepositorio = new BicicletaRepositorio();
 
     private BicicletaController(){}
@@ -33,7 +35,7 @@ public class BicicletaController {
     }
 
     public static void buscarBicicleta(Context ctx) {
-        String bicicletaId = ctx.pathParam("idBicicleta");
+        String bicicletaId = ctx.pathParam(PATH_ID);
         Bicicleta bicicleta = bicicletaRepositorio.buscarBicicleta(bicicletaId);
         String response = JavalinJson.toJson(bicicleta);
         ctx.result(response);
@@ -42,7 +44,7 @@ public class BicicletaController {
 
     public static void atualizarBicicleta(Context ctx) {
         String body = ctx.body();
-        String id = ctx.pathParam("idBicicleta");
+        String id = ctx.pathParam(PATH_ID);
         Bicicleta bicicleta = JavalinJson.getFromJsonMapper().map(body, Bicicleta.class);
         Validacao.validarCampos(bicicleta);
         Bicicleta resultado = bicicletaRepositorio.atualizarBicicleta(id, bicicleta);
@@ -52,13 +54,13 @@ public class BicicletaController {
     }
 
     public static void deletarBicicleta(Context ctx) {
-        String id = ctx.pathParam("idBicicleta");
+        String id = ctx.pathParam(PATH_ID);
         bicicletaRepositorio.deletarBicicleta(id);
         ctx.status(200);
     }
 
     public static void alterarStatus(Context ctx) {
-        String id = ctx.pathParam("idBicicleta");
+        String id = ctx.pathParam(PATH_ID);
         String status = ctx.pathParam("acao");
         Bicicleta bicicleta = bicicletaRepositorio.alterarStatus(id, status);
         String response = JavalinJson.getToJsonMapper().map(bicicleta);
