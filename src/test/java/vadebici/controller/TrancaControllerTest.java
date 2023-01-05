@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import io.javalin.plugin.json.JavalinJson;
 import vadebici.db_in_memory.Database;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
@@ -43,7 +45,7 @@ class TrancaControllerTest {
     void salvaTranca_QuandoBemSucedido() {
         PostTranca postTranca = getPostTranca();
         HttpResponse<JsonNode> response = Unirest.post(BASE_URL)
-                .body(postTranca)
+                .body(JavalinJson.toJson(postTranca))
                 .asJson();
         JSONObject jsonResponse = response.getBody().getObject();
 
@@ -86,7 +88,7 @@ class TrancaControllerTest {
         Tranca tranca = getTranca();
         tranca.setLocalizacao("ALTERADO");
         HttpResponse<JsonNode> response = Unirest.put(BASE_URL+"/123")
-                .body(tranca)
+                .body(JavalinJson.toJson(tranca))
                 .asJson();
         JSONObject jsonResponse = response.getBody().getObject();
 
