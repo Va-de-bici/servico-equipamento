@@ -10,7 +10,7 @@ import vadebici.util.Validacao;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TotemRepo {
+public class TotemRepositorio {
 
     public Totem salvarTotem(PostTotem postTotem) {
         Validacao.validarCampos(postTotem);
@@ -52,7 +52,7 @@ public class TotemRepo {
         return Database.TRANCA_TABLE.keySet()
                 .stream()
                 .map(Database.TRANCA_TABLE::get)
-                .filter((t) -> t.getIdTotem().equals(id))
+                .filter(t -> t.getIdTotem().equals(id))
                 .collect(Collectors.toList());
     }
 }

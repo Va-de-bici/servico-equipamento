@@ -16,7 +16,7 @@ import static vadebici.model.TrancaModel.*;
 
 public class TrancaRepoTest {
 
-    private final TrancaRepo trancaRepositorio = new TrancaRepo();
+    private final TrancaRepositorio trancaRepositorio = new TrancaRepositorio();
     @BeforeEach
     void setUp() {
         Database.carregarDados();

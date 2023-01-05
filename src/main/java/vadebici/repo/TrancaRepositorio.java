@@ -10,7 +10,7 @@ import vadebici.util.Validacao;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TrancaRepo {
+public class TrancaRepositorio {
     public Tranca salvarTranca(PostTranca postTranca) {
         Validacao.validarCampos(postTranca);
         Tranca tranca = new Tranca();

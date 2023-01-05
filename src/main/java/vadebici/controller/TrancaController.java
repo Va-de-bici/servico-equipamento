@@ -2,7 +2,7 @@ package vadebici.controller;
 
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTranca;
-import vadebici.repo.TrancaRepo;
+import vadebici.repo.TrancaRepositorio;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJson;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class TrancaController {
 
     private TrancaController(){}
-    public static final TrancaRepo trancaRepositorio = new TrancaRepo();
+    public static final TrancaRepositorio trancaRepositorio = new TrancaRepositorio();
     private static final String TRANCA_ID = "idTranca";
 
     public static void salvarTranca(Context ctx) {

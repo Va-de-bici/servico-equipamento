@@ -18,7 +18,7 @@ import static vadebici.model.TrancaModel.getTranca;
 
 public class TotemRepoTest {
 
-    private final TotemRepo TOTEM_REPO = new TotemRepo();
+    private final TotemRepositorio TOTEM_REPO = new TotemRepositorio();
 
     @BeforeEach
     void setUp() {

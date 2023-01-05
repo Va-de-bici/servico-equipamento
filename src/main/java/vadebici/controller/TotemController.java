@@ -3,7 +3,7 @@ package vadebici.controller;
 import vadebici.dom.Totem;
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTotem;
-import vadebici.repo.TotemRepo;
+import vadebici.repo.TotemRepositorio;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJson;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TotemController {
 
-    public static final TotemRepo TOTEM_REPO = new TotemRepo();
+    public static final TotemRepositorio TOTEM_REPO = new TotemRepositorio();
     private static final String PATH_ID = "idTotem";
 
     private TotemController(){}
