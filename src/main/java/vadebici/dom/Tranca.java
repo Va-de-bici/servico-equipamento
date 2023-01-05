@@ -8,7 +8,7 @@ public class Tranca {
     private String numero;
     private String localizacao;
     private String anoDeFabricacao;
-    private String Database;
+    private String modelo;
     private TrancaStatus status;
 
     public String getId() {
@@ -60,11 +60,11 @@ public class Tranca {
     }
 
     public String getModelo() {
-        return Database;
+        return modelo;
     }
 
-    public void setModelo(String Database) {
-        this.Database = Database;
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
 
     public TrancaStatus getStatus() {

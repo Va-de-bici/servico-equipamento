@@ -28,6 +28,7 @@ public class JavalinApp {
                         path(PATH_TRANCA, () -> delete(TrancaController::deletarTranca));
                         path(PATH_TRANCA, () -> put(TrancaController::atualizarTranca));
                         path(PATH_TRANCA + "/status/:acao", () -> post(TrancaController::alterarStatus));
+                        path("/tranca/integrarNaRede", () -> post(TrancaController::integrarNaRede));
 
                         path("/bicicleta", () -> get(BicicletaController::buscarBicicletas));
                         path("/bicicleta", () -> post(BicicletaController::salvarBicicleta));
