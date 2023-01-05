@@ -94,7 +94,7 @@ class TotemControllerTest {
         assertEquals(tranca.getLocalizacao(), jsonResponse.getJSONObject(0).get("localizacao"));
         assertEquals(tranca.getAnoDeFabricacao(), jsonResponse.getJSONObject(0).get("anoDeFabricacao"));
         assertEquals(tranca.getStatus().toString(), jsonResponse.getJSONObject(0).get("status"));
-        assertEquals(tranca.getModelo(), jsonResponse.getJSONObject(0).get("Database"));
+        assertEquals(tranca.getModelo(), jsonResponse.getJSONObject(0).get("modelo"));
         assertEquals(tranca.getId(), jsonResponse.getJSONObject(0).get("id"));
     }
 }
