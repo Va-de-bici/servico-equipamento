@@ -68,7 +68,7 @@ public class BicicletaRepositorioTest {
     @Test
     void atualizaBicicleta_QuandoBemSucedido() {
         Bicicleta bicicleta = getBicicleta();
-        bicicleta.setMarca("ALTERADO");
+        bicicleta.setAno("111");
         Bicicleta bicicletaResposta = bicicletaRepositorio.atualizarBicicleta(bicicleta.getId(), bicicleta);
 
         assertEquals(bicicleta, bicicletaResposta);
