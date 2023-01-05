@@ -34,7 +34,7 @@ public class Bicicleta {
                 ", status=" + status +
                 '}';
     }
-
+    
     public String getId() {
         return id;
     }

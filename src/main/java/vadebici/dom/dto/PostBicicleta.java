@@ -31,8 +31,8 @@ public class PostBicicleta {
         return marca;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setMarca(String marcaBici) {
+        this.marca = marcaBici;
     }
 
     public String getModelo() {
@@ -47,23 +47,23 @@ public class PostBicicleta {
         return ano;
     }
 
-    public void setAno(String ano) {
-        this.ano = ano;
+    public void setAno(String anoBici) {
+        this.ano = anoBici;
     }
 
     public Integer getNumero() {
         return numero;
     }
 
-    public void setNumero(Integer numero) {
-        this.numero = numero;
+    public void setNumero(Integer numeroBici) {
+        this.numero = numeroBici;
     }
 
     public BicicletaStatus getStatus() {
         return status;
     }
 
-    public void setStatus(BicicletaStatus status) {
-        this.status = status;
+    public void setStatus(BicicletaStatus statusBici) {
+        this.status = statusBici;
     }
 }
