@@ -3,6 +3,7 @@ package vadebici.model;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
+import vadebici.dom.dto.TrancaNaRede;
 
 public class TrancaModel {
 
@@ -27,5 +28,12 @@ public class TrancaModel {
         postTranca.setNumero(123);
         postTranca.setStatus(TrancaStatus.DISPONIVEL);
         return postTranca;
+    }
+
+    public static TrancaNaRede getTrancaNaRede() {
+        TrancaNaRede trancaNaRede = new TrancaNaRede();
+        trancaNaRede.setIdTranca("123");
+        trancaNaRede.setIdTotem("123");
+        return trancaNaRede;
     }
 }

@@ -16,7 +16,7 @@ import static vadebici.model.TotemModel.getPostTotem;
 import static vadebici.model.TotemModel.getTotem;
 import static vadebici.model.TrancaModel.getTranca;
 
-public class TotemRepoTest {
+public class TotemRepositorioTest {
 
     private final TotemRepositorio TOTEM_REPO = new TotemRepositorio();
 

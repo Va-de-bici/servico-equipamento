@@ -5,7 +5,7 @@ import vadebici.dom.Totem;
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTotem;
 import vadebici.exception.GenericApiException;
-import vadebici.util.Validacao;
+
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 public class TotemRepositorio {
 
     public Totem salvarTotem(PostTotem postTotem) {
-        Validacao.validarCampos(postTotem);
         Totem totem = new Totem();
         String id = UUID.randomUUID().toString();
         totem.setLocalizacao(postTotem.getLocalizacao());

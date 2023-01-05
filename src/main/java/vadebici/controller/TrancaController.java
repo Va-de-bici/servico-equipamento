@@ -2,7 +2,9 @@ package vadebici.controller;
 
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTranca;
+import vadebici.dom.dto.TrancaNaRede;
 import vadebici.repo.TrancaRepositorio;
+import vadebici.util.Validacao;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJson;
 
@@ -18,6 +20,7 @@ public class TrancaController {
     public static void salvarTranca(Context ctx) {
         String body = ctx.body();
         PostTranca postTranca = JavalinJson.getFromJsonMapper().map(body, PostTranca.class);
+        Validacao.validarCampos(postTranca);
         Tranca tranca = trancaRepositorio.salvarTranca(postTranca);
         String response = JavalinJson.toJson(tranca);
         ctx.result(response);
@@ -44,6 +47,7 @@ public class TrancaController {
         String id = ctx.pathParam(TRANCA_ID);
         Tranca tranca = JavalinJson.getFromJsonMapper().map(body, Tranca.class);
         Tranca resultado = trancaRepositorio.atualizarTranca(id, tranca);
+        Validacao.validarCampos(tranca);
         ctx.status(200);
         ctx.result(JavalinJson.toJson(resultado));
     }
@@ -61,5 +65,13 @@ public class TrancaController {
         String response = JavalinJson.getToJsonMapper().map(tranca);
         ctx.status(200);
         ctx.result(response);
+    }
+
+    public static void integrarNaRede(Context ctx) {
+        String body = ctx.body();
+        TrancaNaRede trancaNaRede = JavalinJson.getFromJsonMapper().map(body, TrancaNaRede.class);
+        Validacao.validarCampos(trancaNaRede);
+        trancaRepositorio.integrarNaRede(trancaNaRede);
+        ctx.status(200);
     }
 }

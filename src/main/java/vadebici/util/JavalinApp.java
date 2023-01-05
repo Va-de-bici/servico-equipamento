@@ -3,13 +3,15 @@ package vadebici.util;
 import io.javalin.plugin.json.JavalinJson;
 import vadebici.controller.TotemController;
 import vadebici.controller.TrancaController;
-import io.javalin.Javalin;
+import vadebici.controller.BicicletaController;
 import vadebici.exception.GenericApiException;
+import io.javalin.Javalin;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class JavalinApp {
     private static String PATH_TRANCA = "/tranca/:idTranca";
+    private static String PATH_BICICLETA = "/bicicleta/:idBicicleta";
 
     private final Javalin app =
             Javalin.create(config -> config.defaultContentType = "application/json")
@@ -26,6 +28,13 @@ public class JavalinApp {
                         path(PATH_TRANCA, () -> delete(TrancaController::deletarTranca));
                         path(PATH_TRANCA, () -> put(TrancaController::atualizarTranca));
                         path(PATH_TRANCA + "/status/:acao", () -> post(TrancaController::alterarStatus));
+
+                        path("/bicicleta", () -> get(BicicletaController::buscarBicicletas));
+                        path("/bicicleta", () -> post(BicicletaController::salvarBicicleta));
+                        path(PATH_BICICLETA, () -> get(BicicletaController::buscarBicicleta));
+                        path(PATH_BICICLETA, () -> delete(BicicletaController::deletarBicicleta));
+                        path(PATH_BICICLETA, () -> put(BicicletaController::atualizarBicicleta));
+                        path(PATH_BICICLETA + "/status/:acao", () -> post(BicicletaController::alterarStatus));
                     })
                     .error(500, ctx -> {
                         GenericApiException ex = new GenericApiException(500, "Ocorreu um erro durante a operação");

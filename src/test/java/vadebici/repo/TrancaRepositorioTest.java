@@ -7,6 +7,8 @@ import vadebici.db_in_memory.Database;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
+import vadebici.dom.dto.TrancaNaRede;
+
 import vadebici.exception.GenericApiException;
 
 import java.util.List;
@@ -14,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static vadebici.model.TrancaModel.*;
 
-public class TrancaRepoTest {
+public class TrancaRepositorioTest {
 
     private final TrancaRepositorio trancaRepositorio = new TrancaRepositorio();
     @BeforeEach
@@ -103,5 +105,21 @@ public class TrancaRepoTest {
         Tranca trancaOcupada = trancaRepositorio.buscarTranca(tranca.getId());
 
         assertEquals(TrancaStatus.OCUPADA, trancaOcupada.getStatus());
+    }
+
+    @Test
+    void intergraNaRede_QuandoBemSucedido() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+        trancaRepositorio.integrarNaRede(trancaNaRede);
+        Tranca trancaResposta = trancaRepositorio.buscarTranca(trancaNaRede.getIdTranca());
+
+        assertNotNull(trancaResposta.getIdTotem());
+    }
+
+    @Test
+    void intergraNaRede_LancaExcecao_QuandoTotemNaoExiste() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+        trancaNaRede.setIdTotem("000");
+        assertThrows(GenericApiException.class, () -> trancaRepositorio.integrarNaRede(trancaNaRede));
     }
 }

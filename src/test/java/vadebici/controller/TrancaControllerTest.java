@@ -52,7 +52,7 @@ class TrancaControllerTest {
         assertEquals(postTranca.getLocalizacao(), jsonResponse.get("localizacao"));
         assertEquals(postTranca.getAnoDeFabricacao(), jsonResponse.get("anoDeFabricacao"));
         assertEquals(postTranca.getStatus().toString(), jsonResponse.get("status"));
-        assertEquals(postTranca.getModelo(), jsonResponse.get("modelo"));
+        assertEquals(postTranca.getModelo(), jsonResponse.get("Database"));
         assertNotNull(jsonResponse.get("id"));
     }
 
@@ -77,7 +77,7 @@ class TrancaControllerTest {
         assertEquals(tranca.getLocalizacao(), jsonResponse.get("localizacao"));
         assertEquals(tranca.getAnoDeFabricacao(), jsonResponse.get("anoDeFabricacao"));
         assertEquals(tranca.getStatus().toString(), jsonResponse.get("status"));
-        assertEquals(tranca.getModelo(), jsonResponse.get("modelo"));
+        assertEquals(tranca.getModelo(), jsonResponse.get("Database"));
         assertEquals(tranca.getId(), jsonResponse.get("id"));
     }
 
@@ -95,7 +95,7 @@ class TrancaControllerTest {
         assertEquals(tranca.getLocalizacao(), jsonResponse.get("localizacao"));
         assertEquals(tranca.getAnoDeFabricacao(), jsonResponse.get("anoDeFabricacao"));
         assertEquals(tranca.getStatus().toString(), jsonResponse.get("status"));
-        assertEquals(tranca.getModelo(), jsonResponse.get("modelo"));
+        assertEquals(tranca.getModelo(), jsonResponse.get("Database"));
         assertEquals(tranca.getId(), jsonResponse.get("id"));
     }
 
@@ -111,7 +111,7 @@ class TrancaControllerTest {
         assertEquals(tranca.getLocalizacao(), jsonResponse.get("localizacao"));
         assertEquals(tranca.getAnoDeFabricacao(), jsonResponse.get("anoDeFabricacao"));
         assertEquals(TrancaStatus.MANUTENCAO.toString(), jsonResponse.get("status"));
-        assertEquals(tranca.getModelo(), jsonResponse.get("modelo"));
+        assertEquals(tranca.getModelo(), jsonResponse.get("Database"));
         assertEquals(tranca.getId(), jsonResponse.get("id"));
     }
 }

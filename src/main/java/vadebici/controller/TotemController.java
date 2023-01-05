@@ -6,6 +6,7 @@ import vadebici.dom.dto.PostTotem;
 import vadebici.repo.TotemRepositorio;
 import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJson;
+import vadebici.util.Validacao;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class TotemController {
     public static void salvarTotem(Context ctx) {
         String body = ctx.body();
         PostTotem postTotem = JavalinJson.getFromJsonMapper().map(body, PostTotem.class);
+        Validacao.validarCampos(postTotem);
         Totem totem = TOTEM_REPO.salvarTotem(postTotem);
         String response = JavalinJson.toJson(totem);
         ctx.result(response);
