@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import io.javalin.plugin.json.JavalinJson;
 import vadebici.db_in_memory.Database;
 import vadebici.dom.Bicicleta;
 import vadebici.dom.BicicletaStatus;
@@ -47,7 +49,7 @@ class BicicletaControllerTest {
     void salvaBicicleta_QuandoBemSucedido() {
         PostBicicleta postBicicleta = getPostBicicleta();
         HttpResponse<JsonNode> response = Unirest.post(BASE_URL)
-                .body(postBicicleta)
+                .body(JavalinJson.toJson(postBicicleta))
                 .asJson();
         JSONObject jsonResponse = response.getBody().getObject();
 
@@ -55,7 +57,7 @@ class BicicletaControllerTest {
         assertEquals(postBicicleta.getNumero(), jsonResponse.get("numero"));
         assertEquals(postBicicleta.getStatus().toString(), jsonResponse.get("status"));
         assertEquals(postBicicleta.getAno(), jsonResponse.get("ano"));
-        assertEquals(postBicicleta.getModelo(), jsonResponse.get("Database"));
+        assertEquals(postBicicleta.getModelo(), jsonResponse.get("modelo"));
         assertNotNull(jsonResponse.get("id"));
     }
 
@@ -79,7 +81,7 @@ class BicicletaControllerTest {
         assertEquals(bicicleta.getNumero(), jsonResponse.get("numero"));
         assertEquals(bicicleta.getStatus().toString(), jsonResponse.get("status"));
         assertEquals(bicicleta.getAno(), jsonResponse.get("ano"));
-        assertEquals(bicicleta.getModelo(), jsonResponse.get("Database"));
+        assertEquals(bicicleta.getModelo(), jsonResponse.get("modelo"));
         assertEquals(bicicleta.getId(), jsonResponse.get("id"));
     }
 
@@ -89,7 +91,7 @@ class BicicletaControllerTest {
         bicicleta.setMarca("ALTERADO");
 
         HttpResponse<JsonNode> response = Unirest.put(BASE_URL+"/123")
-                .body(bicicleta)
+                .body(JavalinJson.toJson(bicicleta))
                 .asJson();
         JSONObject jsonResponse = response.getBody().getObject();
 
@@ -97,7 +99,7 @@ class BicicletaControllerTest {
         assertEquals(bicicleta.getNumero(), jsonResponse.get("numero"));
         assertEquals(bicicleta.getStatus().toString(), jsonResponse.get("status"));
         assertEquals(bicicleta.getAno(), jsonResponse.get("ano"));
-        assertEquals(bicicleta.getModelo(), jsonResponse.get("Database"));
+        assertEquals(bicicleta.getModelo(), jsonResponse.get("modelo"));
         assertEquals(bicicleta.getId(), jsonResponse.get("id"));
     }
 
@@ -111,7 +113,7 @@ class BicicletaControllerTest {
         assertEquals(200, response.getStatus());
         assertEquals(bicicleta.getNumero(), jsonResponse.get("numero"));
         assertEquals(bicicleta.getAno(), jsonResponse.get("ano"));
-        assertEquals(bicicleta.getModelo(), jsonResponse.get("Database"));
+        assertEquals(bicicleta.getModelo(), jsonResponse.get("modelo"));
         assertEquals(bicicleta.getId(), jsonResponse.get("id"));
         assertEquals(BicicletaStatus.APOSENTADA.toString(), jsonResponse.get("status"));
 
