@@ -4,6 +4,7 @@ import io.javalin.http.Context;
 import io.javalin.plugin.json.JavalinJson;
 import vadebici.dom.Bicicleta;
 import vadebici.dom.dto.PostBicicleta;
+import vadebici.dom.dto.BicicletaNaRede;
 import vadebici.repo.BicicletaRepositorio;
 import vadebici.util.Validacao;
 
@@ -66,5 +67,19 @@ public class BicicletaController {
         String response = JavalinJson.getToJsonMapper().map(bicicleta);
         ctx.status(200);
         ctx.result(response);
+    }
+
+    public static void integrarNaRede(Context ctx) {
+        String body = ctx.body();
+        BicicletaNaRede bicicletaNaRede = JavalinJson.getFromJsonMapper().map(body, BicicletaNaRede.class);
+        bicicletaRepositorio.integrarNaRede(bicicletaNaRede);
+        ctx.status(200);
+    }
+
+    public static void removerDaRede(Context ctx) {
+        String body = ctx.body();
+        BicicletaNaRede bicicletaNaRede = JavalinJson.getFromJsonMapper().map(body, BicicletaNaRede.class);
+        bicicletaRepositorio.removerDaRede(bicicletaNaRede);
+        ctx.status(200);
     }
 }

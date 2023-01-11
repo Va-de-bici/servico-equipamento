@@ -14,6 +14,8 @@ import vadebici.db_in_memory.Database;
 import vadebici.dom.Bicicleta;
 import vadebici.dom.BicicletaStatus;
 import vadebici.dom.dto.PostBicicleta;
+import vadebici.dom.dto.BicicletaNaRede;
+import vadebici.repo.BicicletaRepositorio;
 import vadebici.util.JavalinApp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +26,7 @@ class BicicletaControllerTest {
 
     private final static JavalinApp app = new JavalinApp();
     private static final String BASE_URL = "http://localhost:7010/bicicleta";
+    private final BicicletaRepositorio bicicletaRepositorio = new BicicletaRepositorio();
 
     @BeforeAll
     static void init() {
@@ -116,6 +119,40 @@ class BicicletaControllerTest {
         assertEquals(bicicleta.getModelo(), jsonResponse.get("modelo"));
         assertEquals(bicicleta.getId(), jsonResponse.get("id"));
         assertEquals(BicicletaStatus.APOSENTADA.toString(), jsonResponse.get("status"));
+    }
 
+    @Test
+    void removeBicicletaDaRede_QuandoBemSucedido() {
+        BicicletaNaRede bicicletaNaRede = getBicicletaNaRede();
+        HttpResponse<String> response = Unirest.post(BASE_URL+"/removerDaRede")
+                .body(bicicletaNaRede)
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
+    }
+    @Test
+    void integraBicicletaNaRede_QuandoBemSucedido() {
+        BicicletaNaRede bicicletaNaRede = getBicicletaNaRede();
+        bicicletaRepositorio.removerDaRede(bicicletaNaRede);
+        HttpResponse<String> response = Unirest.post(BASE_URL+"/integrarNaRede")
+                .body(bicicletaNaRede)
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
+    }
+
+    @Test
+    void deletaBicicleta_QuandoBemSucedido() {
+        BicicletaNaRede bicicletaNaRede = getBicicletaNaRede();
+        bicicletaRepositorio.removerDaRede(bicicletaNaRede);
+        bicicletaRepositorio.alterarStatus(bicicletaNaRede.getIdBicicleta(), "APOSENTADA");
+
+        HttpResponse<String> response = Unirest.delete(BASE_URL+"/123")
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
     }
 }

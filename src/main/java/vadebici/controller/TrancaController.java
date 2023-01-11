@@ -1,6 +1,7 @@
 package vadebici.controller;
 
 import vadebici.dom.Tranca;
+import vadebici.dom.Bicicleta;
 import vadebici.dom.dto.PostTranca;
 import vadebici.dom.dto.TrancaNaRede;
 import vadebici.repo.TrancaRepositorio;
@@ -58,6 +59,14 @@ public class TrancaController {
         ctx.status(200);
     }
 
+    public static void buscaBicicletaPorTranca(Context ctx) {
+        String id = ctx.pathParam("idTranca");
+        Bicicleta bicicleta = trancaRepositorio.buscarBicicletaPorTranca(id);
+        String response = JavalinJson.getToJsonMapper().map(bicicleta);
+        ctx.status(200);
+        ctx.result(response);
+    }
+
     public static void alterarStatus(Context ctx) {
         String id = ctx.pathParam(TRANCA_ID);
         String status = ctx.pathParam("acao");
@@ -72,6 +81,14 @@ public class TrancaController {
         TrancaNaRede trancaNaRede = JavalinJson.getFromJsonMapper().map(body, TrancaNaRede.class);
         Validacao.validarCampos(trancaNaRede);
         trancaRepositorio.integrarNaRede(trancaNaRede);
+        ctx.status(200);
+    }
+
+    public static void removerDaRede(Context ctx) {
+        String body = ctx.body();
+        TrancaNaRede trancaNaRede = JavalinJson.getFromJsonMapper().map(body, TrancaNaRede.class);
+        Validacao.validarCampos(trancaNaRede);
+        trancaRepositorio.removerDaRede(trancaNaRede);
         ctx.status(200);
     }
 }

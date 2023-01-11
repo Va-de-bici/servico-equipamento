@@ -8,22 +8,31 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import io.javalin.plugin.json.JavalinJson;
+
 import vadebici.db_in_memory.Database;
+import vadebici.dom.Bicicleta;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
+import vadebici.dom.dto.TrancaNaRede;
+import vadebici.dom.dto.BicicletaNaRede;
+import vadebici.model.BicicletaModel;
+import vadebici.repo.TrancaRepositorio;
+import vadebici.repo.BicicletaRepositorio;
 import vadebici.util.JavalinApp;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static vadebici.model.BicicletaModel.getBicicletaNaRede;
 import static vadebici.model.TrancaModel.*;
 
 class TrancaControllerTest {
 
     private final static JavalinApp app = new JavalinApp();
     private static final String BASE_URL = "http://localhost:7010/tranca";
+    private final TrancaRepositorio trancaRepositorio = new TrancaRepositorio();
+    private final BicicletaRepositorio bicicletaRepositorio = new BicicletaRepositorio();
 
     @BeforeAll
     static void init() {
@@ -115,5 +124,55 @@ class TrancaControllerTest {
         assertEquals(TrancaStatus.MANUTENCAO.toString(), jsonResponse.get("status"));
         assertEquals(tranca.getModelo(), jsonResponse.get("modelo"));
         assertEquals(tranca.getId(), jsonResponse.get("id"));
+    }
+
+    @Test
+    void buscarBicicletaPorTranca() {
+        Bicicleta bicicleta = BicicletaModel.getBicicleta();
+        HttpResponse<JsonNode> response = Unirest.get(BASE_URL+"/123/bicicleta")
+                .asJson();
+
+        JSONObject jsonResponse = response.getBody().getObject();
+
+        assertEquals(200, response.getStatus());
+        assertEquals(bicicleta.getNumero(), jsonResponse.get("numero"));
+        assertEquals(bicicleta.getStatus().toString(), jsonResponse.get("status"));
+        assertEquals(bicicleta.getAno(), jsonResponse.get("ano"));
+        assertEquals(bicicleta.getModelo(), jsonResponse.get("modelo"));
+        assertEquals(bicicleta.getId(), jsonResponse.get("id"));
+    }
+
+    @Test
+    void removeTrancaDaRede_QuandoBemSucedido() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+        bicicletaRepositorio.removerDaRede(getBicicletaNaRede());
+        HttpResponse<String> response = Unirest.post(BASE_URL+"/removerDaRede")
+                .body(trancaNaRede)
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
+    }
+
+    @Test
+    void integraTrancaNaRede_QuandoBemSucedido() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+        HttpResponse<String> response = Unirest.post(BASE_URL+"/integrarNaRede")
+                .body(trancaNaRede)
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
+    }
+
+    @Test
+    void deletaTranca_QuandoBemSucedido() {
+        BicicletaNaRede bicicletaNaRede = getBicicletaNaRede();
+        bicicletaRepositorio.removerDaRede(bicicletaNaRede);
+        HttpResponse<String> response = Unirest.delete(BASE_URL+"/123")
+                .asString();
+
+        assertEquals(200, response.getStatus());
+        assertEquals("", response.getBody());
     }
 }

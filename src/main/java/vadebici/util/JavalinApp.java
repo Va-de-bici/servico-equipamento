@@ -21,6 +21,7 @@ public class JavalinApp {
                         path("/totem/:idTotem", () -> delete(TotemController::deletarTotem));
                         path("/totem/:idTotem", () -> put(TotemController::atualizarTotem));
                         path("/totem/:idTotem/trancas", () -> get(TotemController::buscarTrancasPorTotem));
+                        path("/totem/:idTotem/bicicletas", () -> get(TotemController::buscarBicicletasPorTotem));
 
                         path("/tranca", () -> get(TrancaController::buscarTrancas));
                         path("/tranca", () -> post(TrancaController::salvarTranca));
@@ -29,6 +30,8 @@ public class JavalinApp {
                         path(PATH_TRANCA, () -> put(TrancaController::atualizarTranca));
                         path(PATH_TRANCA + "/status/:acao", () -> post(TrancaController::alterarStatus));
                         path("/tranca/integrarNaRede", () -> post(TrancaController::integrarNaRede));
+                        path("/tranca/removerDaRede", () -> post(TrancaController::removerDaRede));
+                        path(PATH_TRANCA + "/bicicleta", () -> get(TrancaController::buscaBicicletaPorTranca));
 
                         path("/bicicleta", () -> get(BicicletaController::buscarBicicletas));
                         path("/bicicleta", () -> post(BicicletaController::salvarBicicleta));
@@ -36,6 +39,8 @@ public class JavalinApp {
                         path(PATH_BICICLETA, () -> delete(BicicletaController::deletarBicicleta));
                         path(PATH_BICICLETA, () -> put(BicicletaController::atualizarBicicleta));
                         path(PATH_BICICLETA + "/status/:acao", () -> post(BicicletaController::alterarStatus));
+                        path("/bicicleta/integrarNaRede", () -> post(BicicletaController::integrarNaRede));
+                        path("/bicicleta/removerDaRede", () -> post(BicicletaController::removerDaRede));
                     })
                     .error(500, ctx -> {
                         GenericApiException ex = new GenericApiException(500, "Ocorreu um erro durante a operação");

@@ -3,6 +3,7 @@ package vadebici.model;
 import vadebici.dom.Bicicleta;
 import vadebici.dom.BicicletaStatus;
 import vadebici.dom.dto.PostBicicleta;
+import vadebici.dom.dto.BicicletaNaRede;
 
 public class BicicletaModel {
 
@@ -25,5 +26,12 @@ public class BicicletaModel {
         postBicicleta.setAno("123");
         postBicicleta.setNumero(123);
         return postBicicleta;
+    }
+
+    public static BicicletaNaRede getBicicletaNaRede() {
+        BicicletaNaRede bicicletaNaRede = new BicicletaNaRede();
+        bicicletaNaRede.setIdBicicleta("123");
+        bicicletaNaRede.setIdTranca("123");
+        return bicicletaNaRede;
     }
 }

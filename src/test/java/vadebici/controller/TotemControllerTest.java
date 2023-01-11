@@ -8,8 +8,10 @@ import kong.unirest.json.JSONObject;
 import org.junit.jupiter.api.*;
 import vadebici.db_in_memory.Database;
 import vadebici.dom.Totem;
+import vadebici.dom.Bicicleta;
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTotem;
+import vadebici.model.BicicletaModel;
 import vadebici.model.TrancaModel;
 import vadebici.util.JavalinApp;
 
@@ -96,5 +98,20 @@ class TotemControllerTest {
         assertEquals(tranca.getStatus().toString(), jsonResponse.getJSONObject(0).get("status"));
         assertEquals(tranca.getModelo(), jsonResponse.getJSONObject(0).get("modelo"));
         assertEquals(tranca.getId(), jsonResponse.getJSONObject(0).get("id"));
+    }
+
+    @Test
+    void buscarBicicletasPorTotem() {
+        Bicicleta bicicleta = BicicletaModel.getBicicleta();
+        HttpResponse<JsonNode> response = Unirest.get(BASE_URL+"/123/bicicletas")
+                .asJson();
+        JSONArray jsonResponse = response.getBody().getArray();
+
+        assertEquals(200, response.getStatus());
+        assertEquals(bicicleta.getNumero(), jsonResponse.getJSONObject(0).get("numero"));
+        assertEquals(bicicleta.getStatus().toString(), jsonResponse.getJSONObject(0).get("status"));
+        assertEquals(bicicleta.getAno(), jsonResponse.getJSONObject(0).get("ano"));
+        assertEquals(bicicleta.getModelo(), jsonResponse.getJSONObject(0).get("modelo"));
+        assertEquals(bicicleta.getId(), jsonResponse.getJSONObject(0).get("id"));
     }
 }
