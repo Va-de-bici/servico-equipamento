@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vadebici.db_in_memory.Database;
 import vadebici.dom.Totem;
+import vadebici.dom.Bicicleta;
 import vadebici.dom.Tranca;
 import vadebici.dom.dto.PostTotem;
 import vadebici.exception.GenericApiException;
@@ -12,6 +13,7 @@ import vadebici.exception.GenericApiException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static vadebici.model.BicicletaModel.getBicicleta;
 import static vadebici.model.TotemModel.getPostTotem;
 import static vadebici.model.TotemModel.getTotem;
 import static vadebici.model.TrancaModel.getTranca;
@@ -101,5 +103,15 @@ public class TotemRepositorioTest {
 
         assertEquals(1, trancaList.size());
         assertEquals(tranca.getId(), trancaList.get(0).getId());
+    }
+
+    @Test
+    void buscaBicicletasPorTotem_QuandoBemSucedido() {
+        Totem totem = getTotem();
+        Bicicleta bicicleta = getBicicleta();
+        List<Bicicleta> bicicletaList = TOTEM_REPO.buscarBicicletas(totem.getId());
+
+        assertEquals(1, bicicletaList.size());
+        assertEquals(bicicleta, bicicletaList.get(0));
     }
 }

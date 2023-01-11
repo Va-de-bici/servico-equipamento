@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vadebici.db_in_memory.Database;
 import vadebici.dom.Tranca;
+import vadebici.dom.Bicicleta;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
 import vadebici.dom.dto.TrancaNaRede;
@@ -15,10 +16,13 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static vadebici.model.TrancaModel.*;
+import static vadebici.model.BicicletaModel.getBicicleta;
+import static vadebici.model.BicicletaModel.getBicicletaNaRede;
 
 public class TrancaRepositorioTest {
 
     private final TrancaRepositorio trancaRepositorio = new TrancaRepositorio();
+    private final BicicletaRepositorio bicicletaRepositorio = new BicicletaRepositorio();
     @BeforeEach
     void setUp() {
         Database.carregarDados();
@@ -87,7 +91,9 @@ public class TrancaRepositorioTest {
 
     @Test
     void deletaTranca_QuandoBemSucedido() {
-        trancaRepositorio.deletarTranca("123");
+        Tranca tranca = getTranca();
+        bicicletaRepositorio.removerDaRede(getBicicletaNaRede());
+        trancaRepositorio.deletarTranca(tranca.getId());
         assertThrows(GenericApiException.class,
                 () -> trancaRepositorio.deletarTranca("321"));
     }
@@ -121,5 +127,35 @@ public class TrancaRepositorioTest {
         TrancaNaRede trancaNaRede = getTrancaNaRede();
         trancaNaRede.setIdTotem("000");
         assertThrows(GenericApiException.class, () -> trancaRepositorio.integrarNaRede(trancaNaRede));
+    }
+
+    @Test
+    void buscaBicicletaPorTranca_QuandoBemSucedido() {
+        Tranca tranca = getTranca();
+        Bicicleta bicicleta = getBicicleta();
+        Bicicleta bicicletaResposta = trancaRepositorio.buscarBicicletaPorTranca(tranca.getId());
+
+        assertEquals(bicicleta, bicicletaResposta);
+    }
+    @Test
+    void removeDaRede_QuandoBemSucedido() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+        bicicletaRepositorio.removerDaRede(getBicicletaNaRede());
+        trancaRepositorio.removerDaRede(trancaNaRede);
+        Tranca trancaResposta = trancaRepositorio.buscarTranca(trancaNaRede.getIdTranca());
+
+        assertNull(trancaResposta.getIdTotem());
+    }
+
+    @Test
+    void removerDaRede_LancaExcecao_QuandoTrancaOcupada() {
+        TrancaNaRede trancaNaRede = getTrancaNaRede();
+
+        GenericApiException ex = assertThrows(GenericApiException.class,
+                () -> trancaRepositorio.removerDaRede(trancaNaRede));
+
+
+        assertEquals("Tranca possui uma bicicleta.", ex.getMensagem());
+        assertEquals(422, ex.getCodigo());
     }
 }
