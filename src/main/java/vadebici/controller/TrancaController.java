@@ -60,7 +60,7 @@ public class TrancaController {
     }
 
     public static void buscaBicicletaPorTranca(Context ctx) {
-        String id = ctx.pathParam("idTranca");
+        String id = ctx.pathParam(TRANCA_ID);
         Bicicleta bicicleta = trancaRepositorio.buscarBicicletaPorTranca(id);
         String response = JavalinJson.getToJsonMapper().map(bicicleta);
         ctx.status(200);

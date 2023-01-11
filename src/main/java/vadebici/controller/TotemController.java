@@ -59,7 +59,7 @@ public class TotemController {
     }
 
     public static void buscarBicicletasPorTotem(Context ctx) {
-        String id = ctx.pathParam("idTotem");
+        String id = ctx.pathParam(PATH_ID);
         List<Bicicleta> bicicletaList = TOTEM_REPO.buscarBicicletas(id);
         String response = JavalinJson.toJson(bicicletaList);
         ctx.status(200);

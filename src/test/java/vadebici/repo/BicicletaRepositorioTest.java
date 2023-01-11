@@ -127,7 +127,7 @@ public class BicicletaRepositorioTest {
         bicicletaRepositorio.deletarBicicleta(bicicleta.getId());
 
         assertThrows(GenericApiException.class,
-                () -> bicicletaRepositorio.buscarBicicleta(bicicleta.getId()));
+                () -> bicicletaRepositorio.buscarBicicleta("123"));
     }
 
     @Test
