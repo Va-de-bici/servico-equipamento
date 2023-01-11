@@ -11,7 +11,8 @@ import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class JavalinApp {
     private static String PATH_TRANCA = "/tranca/:idTranca";
-    private static String PATH_BICICLETA = "/bicicleta/:idBicicleta";
+    private static String PATH_BICICLETA = "/bicicleta";
+    private static String PATH_BICICLETA_ID = "/bicicleta/:idBicicleta";
 
     private final Javalin app =
             Javalin.create(config -> config.defaultContentType = "application/json")
@@ -31,14 +32,14 @@ public class JavalinApp {
                         path(PATH_TRANCA + "/status/:acao", () -> post(TrancaController::alterarStatus));
                         path("/tranca/integrarNaRede", () -> post(TrancaController::integrarNaRede));
                         path("/tranca/removerDaRede", () -> post(TrancaController::removerDaRede));
-                        path(PATH_TRANCA + "/bicicleta", () -> get(TrancaController::buscaBicicletaPorTranca));
+                        path(PATH_TRANCA + PATH_BICICLETA, () -> get(TrancaController::buscaBicicletaPorTranca));
 
-                        path("/bicicleta", () -> get(BicicletaController::buscarBicicletas));
-                        path("/bicicleta", () -> post(BicicletaController::salvarBicicleta));
-                        path(PATH_BICICLETA, () -> get(BicicletaController::buscarBicicleta));
-                        path(PATH_BICICLETA, () -> delete(BicicletaController::deletarBicicleta));
-                        path(PATH_BICICLETA, () -> put(BicicletaController::atualizarBicicleta));
-                        path(PATH_BICICLETA + "/status/:acao", () -> post(BicicletaController::alterarStatus));
+                        path(PATH_BICICLETA, () -> get(BicicletaController::buscarBicicletas));
+                        path(PATH_BICICLETA, () -> post(BicicletaController::salvarBicicleta));
+                        path(PATH_BICICLETA_ID, () -> get(BicicletaController::buscarBicicleta));
+                        path(PATH_BICICLETA_ID, () -> delete(BicicletaController::deletarBicicleta));
+                        path(PATH_BICICLETA_ID, () -> put(BicicletaController::atualizarBicicleta));
+                        path(PATH_BICICLETA_ID + "/status/:acao", () -> post(BicicletaController::alterarStatus));
                         path("/bicicleta/integrarNaRede", () -> post(BicicletaController::integrarNaRede));
                         path("/bicicleta/removerDaRede", () -> post(BicicletaController::removerDaRede));
                     })
