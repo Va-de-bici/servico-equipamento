@@ -4,16 +4,16 @@ import jakarta.validation.constraints.NotBlank;
 
 public class RequisicaoEmail {
     @NotBlank(message = "O campo 'email' é obrigatório")
-    private String email;
+    private String endereco;
     @NotBlank(message = "O campo 'mensagem' é obrigatório")
     private String mensagem;
 
-    public String getEmail() {
-        return email;
+    public String getEndereco() {
+        return endereco;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEndereco(String email) {
+        this.endereco = email;
     }
 
     public String getMensagem() {
