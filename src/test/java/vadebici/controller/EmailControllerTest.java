@@ -36,4 +36,5 @@ public class EmailControllerTest {
         assertEquals(200, response.getStatus());
         assertEquals("", response.getBody());
     }
+    
 }
