@@ -7,8 +7,8 @@ import vadebici.dom.*;
 import vadebici.exception.GenericApiException;
 
 public class ServicoExterno {
-    public void enviarEmail(Email email) {
-        HttpResponse<String> response = Unirest.post("va-de-bici.herokuapp.com/enviaEmail")
+    public void enviarEmail(RequisicaoEmail email) {
+        HttpResponse<String> response = Unirest.post("http://va-de-bici.herokuapp.com/enviarEmail")
                 .body(email)
                 .asString();
         validarResposta(response);

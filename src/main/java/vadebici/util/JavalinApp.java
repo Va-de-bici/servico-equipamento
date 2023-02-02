@@ -18,6 +18,8 @@ public class JavalinApp {
     private final Javalin app =
             Javalin.create(config -> config.defaultContentType = "application/json")
                     .routes(() -> {
+                        path("/enviarEmail", () -> post(EmailController::enviarEmail));
+
                         path("/totem", () -> get(TotemController::buscarTotens));
                         path("/totem", () -> post(TotemController::salvarTotem));
                         path("/totem/:idTotem", () -> delete(TotemController::deletarTotem));
@@ -43,8 +45,6 @@ public class JavalinApp {
                         path(PATH_BICICLETA_ID + "/status/:acao", () -> post(BicicletaController::alterarStatus));
                         path("/bicicleta/integrarNaRede", () -> post(BicicletaController::integrarNaRede));
                         path("/bicicleta/removerDaRede", () -> post(BicicletaController::removerDaRede));
-
-                        path("/enviaEmail", () -> post(EmailController::enviarEmail));
                     })
                     .error(500, ctx -> {
                         GenericApiException ex = new GenericApiException(500, "Ocorreu um erro durante a operação");
