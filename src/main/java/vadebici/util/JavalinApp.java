@@ -4,6 +4,7 @@ import io.javalin.plugin.json.JavalinJson;
 import vadebici.controller.TotemController;
 import vadebici.controller.TrancaController;
 import vadebici.controller.BicicletaController;
+import vadebici.controller.EmailController;
 import vadebici.exception.GenericApiException;
 import io.javalin.Javalin;
 
@@ -23,7 +24,7 @@ public class JavalinApp {
                         path("/totem/:idTotem", () -> put(TotemController::atualizarTotem));
                         path("/totem/:idTotem/trancas", () -> get(TotemController::buscarTrancasPorTotem));
                         path("/totem/:idTotem/bicicletas", () -> get(TotemController::buscarBicicletasPorTotem));
-
+                        
                         path("/tranca", () -> get(TrancaController::buscarTrancas));
                         path("/tranca", () -> post(TrancaController::salvarTranca));
                         path(PATH_TRANCA, () -> get(TrancaController::buscarTranca));
@@ -33,7 +34,7 @@ public class JavalinApp {
                         path("/tranca/integrarNaRede", () -> post(TrancaController::integrarNaRede));
                         path("/tranca/removerDaRede", () -> post(TrancaController::removerDaRede));
                         path(PATH_TRANCA + PATH_BICICLETA, () -> get(TrancaController::buscaBicicletaPorTranca));
-
+                        
                         path(PATH_BICICLETA, () -> get(BicicletaController::buscarBicicletas));
                         path(PATH_BICICLETA, () -> post(BicicletaController::salvarBicicleta));
                         path(PATH_BICICLETA_ID, () -> get(BicicletaController::buscarBicicleta));
@@ -42,6 +43,8 @@ public class JavalinApp {
                         path(PATH_BICICLETA_ID + "/status/:acao", () -> post(BicicletaController::alterarStatus));
                         path("/bicicleta/integrarNaRede", () -> post(BicicletaController::integrarNaRede));
                         path("/bicicleta/removerDaRede", () -> post(BicicletaController::removerDaRede));
+
+                        path("/enviaEmail", () -> post(EmailController::enviarEmail));
                     })
                     .error(500, ctx -> {
                         GenericApiException ex = new GenericApiException(500, "Ocorreu um erro durante a operação");

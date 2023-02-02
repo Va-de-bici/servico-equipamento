@@ -1,15 +1,15 @@
 package vadebici.dom;
 
 public class Email {
-    private String enderecoEmail;
+    private String email;
     private String mensagem;
 
-    public String getEnderecoEmail() {
-        return enderecoEmail;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEnderecoEmail(String enderecoEmail) {
-        this.enderecoEmail = enderecoEmail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getMensagem() {
