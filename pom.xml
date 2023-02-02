@@ -48,8 +48,7 @@
             <groupId>com.konghq</groupId>
             <artifactId>unirest-java</artifactId>
             <version>${unirest-java.version}</version>
-            <scope>test</scope>
-    	</dependency>
+        </dependency>
         <!-- A dependencia abaixo e um logger -->
         <dependency>
             <groupId>org.slf4j</groupId>

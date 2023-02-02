@@ -132,7 +132,6 @@ public class BicicletaRepositorioTest {
 
     @Test
     void deletarBicicleta_LancaExcecao_QuandoBicicletaNaRede() {
-        // Bicicleta bicicleta = getBicicleta();
         GenericApiException ex = assertThrows(GenericApiException.class,
                 () -> bicicletaRepositorio.deletarBicicleta("123"));
         assertEquals("Não é possível deletar uma bicicleta na rede", ex.getMessage());
