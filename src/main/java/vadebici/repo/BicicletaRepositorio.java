@@ -7,6 +7,7 @@ import vadebici.dom.dto.PostBicicleta;
 import vadebici.dom.dto.BicicletaNaRede;
 import vadebici.dom.Tranca;
 import vadebici.dom.TrancaStatus;
+import vadebici.dom.RequisicaoEmail;
 import vadebici.exception.GenericApiException;
 import vadebici.util.Validacao;
 
@@ -78,6 +79,9 @@ public class BicicletaRepositorio {
         bicicleta.setStatus(BicicletaStatus.DISPONIVEL);
         Database.BICICLETA_TABLE.replace(bicicleta.getId(), bicicleta);
         Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
+        RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
+        requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
+        requisicaoEmail.setMensagem("Bicicleta incluída na rede");
     }
 
     public void removerDaRede(BicicletaNaRede bicicletaNaRede) {
@@ -88,5 +92,8 @@ public class BicicletaRepositorio {
         tranca.setIdBicicleta(null);
         Database.BICICLETA_TABLE.replace(bicicleta.getId(), bicicleta);
         Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
+        RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
+        requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
+        requisicaoEmail.setMensagem("Bicicleta removida da rede");
     }
 }

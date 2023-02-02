@@ -7,6 +7,7 @@ import vadebici.dom.Totem;
 import vadebici.dom.TrancaStatus;
 import vadebici.dom.dto.PostTranca;
 import vadebici.dom.dto.TrancaNaRede;
+import vadebici.dom.RequisicaoEmail;
 import vadebici.exception.GenericApiException;
 
 import java.util.*;
@@ -67,7 +68,10 @@ public class TrancaRepositorio {
         Totem totem = buscarTotem(trancaNaRede.getIdTotem());
         tranca.setIdTotem(totem.getId());
         tranca.setStatus(TrancaStatus.DISPONIVEL);
-        Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
+        Database.TRANCA_TABLE.replace(tranca.getId(), tranca);\
+        RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
+        requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
+        requisicaoEmail.setMensagem("Tranca incluída na rede");
     }
 
     public void removerDaRede(TrancaNaRede trancaNaRede) {
@@ -75,6 +79,9 @@ public class TrancaRepositorio {
         if (tranca.getIdBicicleta() != null) throw new GenericApiException(422, "Tranca possui uma bicicleta.");
         buscarTotem(trancaNaRede.getIdTotem());
         tranca.setIdTotem(null);
+        RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
+        requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
+        requisicaoEmail.setMensagem("Tranca removida da rede");
     }
 
     public Bicicleta buscarBicicletaPorTranca(String id) {
