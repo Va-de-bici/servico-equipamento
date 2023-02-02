@@ -68,7 +68,7 @@ public class TrancaRepositorio {
         Totem totem = buscarTotem(trancaNaRede.getIdTotem());
         tranca.setIdTotem(totem.getId());
         tranca.setStatus(TrancaStatus.DISPONIVEL);
-        Database.TRANCA_TABLE.replace(tranca.getId(), tranca);\
+        Database.TRANCA_TABLE.replace(tranca.getId(), tranca);
         RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
         requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
         requisicaoEmail.setMensagem("Tranca incluída na rede");
