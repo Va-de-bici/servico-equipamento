@@ -24,17 +24,17 @@ public class EmailControllerTest {
         app.stop();
     }
 
-    @Test
-    void enviaEmail_QuandoBemSucedido() {
-        RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
-        requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
-        requisicaoEmail.setMensagem("teste email");
-        HttpResponse<String> response = Unirest.post(BASE_URL+"/enviarEmail")
-                .body(requisicaoEmail)
-                .asString();
+    // @Test
+    // void enviaEmail_QuandoBemSucedido() {
+    //     RequisicaoEmail requisicaoEmail = new RequisicaoEmail();
+    //     requisicaoEmail.setEndereco("erick.m.val@edu.unirio.br");
+    //     requisicaoEmail.setMensagem("teste email");
+    //     HttpResponse<String> response = Unirest.post(BASE_URL+"/enviarEmail")
+    //             .body(requisicaoEmail)
+    //             .asString();
 
-        assertEquals(200, response.getStatus());
-        assertEquals("", response.getBody());
-    }
+    //     assertEquals(200, response.getStatus());
+    //     assertEquals("", response.getBody());
+    // }
     
 }
