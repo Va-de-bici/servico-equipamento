@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EmailControllerTest {
     private final static JavalinApp app = new JavalinApp();
-    private static final String BASE_URL = "va-de-bici.herokuapp.com";
+    private static final String BASE_URL = "http://localhost:7010";
 
     @BeforeAll
     static void init() {
